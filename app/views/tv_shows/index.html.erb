@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tv Shows</h1>
+
+<%= form_tag(tv_shows_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], class: "search-query", placeholder: "namesearch" %>  
+  <%= submit_tag "Search" %>
+<%end%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Time</th>
+      <th>Channel</th>
+      <th>IsFavourite</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tv_shows.each do |tv_show| %>
+      <tr>
+        <td><%= tv_show.name %></td>
+        <td><%= tv_show.show_time %></td>
+        <td><%= tv_show.channel_name %></td>
+        <td><%= best_in_place tv_show, :is_favourite, as: :checkbox, collection: {false: 'No', true: 'Yes'} %> </td>
+        <td><%= link_to 'Show', tv_show %></td>
+        <td><%= link_to 'Edit', edit_tv_show_path(tv_show) %></td>
+        <td><%= link_to 'Destroy', tv_show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tv Show', new_tv_show_path %>
+
