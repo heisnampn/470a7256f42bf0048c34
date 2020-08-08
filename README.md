@@ -22,5 +22,10 @@
   rake db:seed
   ```  
 
+* Create cron job email tv show reminder 
+```
+whenever --update-crontab --set environment=Environment
+```  
+
 
 
